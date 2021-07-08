@@ -10,7 +10,7 @@ def get_info(url):
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--no-sandbox")
     info = []
-    driver  = webdriver.Chrome(executable_path="./Code/chromedriver.exe", options=chrome_options)
+    driver  = webdriver.Chrome(executable_path="chromedriver.exe", options=chrome_options)
     driver.get("http://facebook.com")
     sleep(1.5)
     driver.get(url)
