@@ -9,15 +9,12 @@ def get_info(url):
     chrome_options.add_argument("--headless")
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--no-sandbox")
-    info = []
+    #driver  = webdriver.Chrome(executable_path="chromedriver.exe", options=chrome_options)
     driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=chrome_options)
     driver.get("http://facebook.com")
-    sleep(1.5)
-    driver.get(url)
-    #https://www.facebook.com/leomessi/posts/367512128073717
-    #https://www.facebook.com/viettan/posts/10161553377150620
-    #https://www.facebook.com/thongtinchinhphu/posts/4091030924307397 
     sleep(1)
+    driver.get(url) 
+    sleep(0.5)
     """
     x_path_time = "/html/body/div[1]/div[3]/div[1]/div/div[2]/div[2]/div[2]/div[2]/div/div/div/div/div/div/div/div[1]/div/div[2]/div[1]/div[3]/div[1]/div/div/div[2]/div/div/div[2]/div/span[1]/span/a/abbr/span"
     time = driver.find_elements_by_xpath(x_path_time)
@@ -27,10 +24,10 @@ def get_info(url):
     """
     x_path_post = "/html/body/div[1]/div[3]/div[1]/div/div[2]/div[2]/div[2]/div[2]/div/div/div/div/div/div/div/div[1]/div/div[2]/div[1]/div[3]/div[2]"
     post_message = driver.find_element_by_xpath(x_path_post).text
-    info.append(post_message)
-    print(post_message)
+    data = post_message
     sleep(0.5)
-    
+
+    """
     x_path_like = "/html/body/div[1]/div[3]/div[1]/div/div[2]/div[2]/div[2]/div[2]/div/div/div/div/div/div/div/div[1]/div/div[2]/div[2]/form/div/div[2]/div[1]/div/div[1]/a/span[2]/span/span"
     num_like = driver.find_element_by_xpath(x_path_like).text
     info.append(num_like)
@@ -48,10 +45,11 @@ def get_info(url):
     info.append(num_share)
     print(num_share)
     sleep(1)
+    """
 
     driver.quit()
 
-    return info
+    return data
 
 app = Flask(__name__)
 @app.route('/')
